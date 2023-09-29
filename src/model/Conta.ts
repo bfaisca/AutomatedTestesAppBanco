@@ -1,11 +1,22 @@
+import { NumeroConta } from "./NumeroConta";
+
+
 export class Conta {
 
-    private _numero: string;
+    private _numeroConta: NumeroConta;
     private _saldo: number;
 
     public constructor(numero: string, saldo: number) {
-        this._numero = numero;
+        this._numeroConta = new NumeroConta(numero);
         this._saldo = saldo;
+    }
+
+    public get saldo(): number {
+        return this._saldo;
+    }
+
+    public get numero(): string {
+        return this._numeroConta.numero;
     }
     
     public sacar(valor: number): void {
@@ -21,11 +32,6 @@ export class Conta {
         this.validarValor(valor);
         this._saldo += valor;
     }
-
-    public get saldo(): number {
-        return this._saldo;
-    }
-
     private validarValor(valor: number) {
         if (valor <= 0)
             throw new Error("valor não pode ser igual ou menor que zero");
